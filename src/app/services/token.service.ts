@@ -35,10 +35,10 @@ export class TokenService {
     return token;
   }
 
-  // tokenExpired(): boolean {
-  //   // if now is after when the token expires
-  //   return new Date().getTime() > this.getStorageToken().expires.getTime();
-  // }
+  tokenExpired(): boolean {
+    // if now is after when the token expires
+    return new Date().getTime() > this.getStorageToken().expires.getTime();
+  }
 
   /**
    * is there a token saved
@@ -46,6 +46,18 @@ export class TokenService {
   hasToken(): boolean {
     // make sure all the tokens properties exist
     return localStorage.getItem(Prefs.TOKEN_ACCESS_TOKEN) != null && localStorage.getItem(Prefs.TOKEN_REFRESH_TOKEN) != null && localStorage.getItem(Prefs.TOKEN_EMAIL) != null && localStorage.getItem(Prefs.TOKEN_USERID) != null && localStorage.getItem(Prefs.TOKEN_ROLES) != null && localStorage.getItem(Prefs.TOKEN_EXPIRES) != null;
+  }
+
+  /**
+   * delete the token from local storage
+   */
+  deleteToken() {
+    localStorage.removeItem(Prefs.TOKEN_ACCESS_TOKEN);
+    localStorage.removeItem(Prefs.TOKEN_REFRESH_TOKEN);
+    localStorage.removeItem(Prefs.TOKEN_EMAIL);
+    localStorage.removeItem(Prefs.TOKEN_USERID);
+    localStorage.removeItem(Prefs.TOKEN_ROLES);
+    localStorage.removeItem(Prefs.TOKEN_EXPIRES);
   }
 
   /**

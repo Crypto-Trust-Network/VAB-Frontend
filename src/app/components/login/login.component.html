@@ -8,6 +8,7 @@
       <label>Password</label>
       <input type="password" class="form-control" [(ngModel)]="password" placeholder="Password">
     </div>
-    <button type="button" (click)="loggin()" class="btn btn-primary float-right">Login</button>
+    <small class="text-danger">{{error}}</small>
+    <button type="button" (click)="login()" class="btn btn-primary float-right">Login</button>
   </form>
 </div>

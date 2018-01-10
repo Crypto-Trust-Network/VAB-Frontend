@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { TokenGet } from './models/token';
 import { Subscriber } from 'rxjs/Subscriber';
 import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/share';
 
 @Injectable()
 export class AppService {
@@ -55,6 +56,15 @@ export class AppService {
   }
 
   /**
+   * logout the user
+   */
+  logout() {
+    this.tokenService.deleteToken();
+
+    this.loggedIn.next(false);
+  }
+
+  /**
    * get a token, which is saved here so this can be used in multiple places without having to manage the token each time
    * @param email 
    * @param password 
@@ -62,7 +72,8 @@ export class AppService {
   login(email: string, password: string): Observable<any> {
     var body = "userName=" + email + "&password=" + password + '&grant_type=password';
 
-    let httpResponse: Observable<TokenGet> = this.http.post<TokenGet>(environment.base_endpoint + '/api/account/token', body);
+    // share the obserable so the request is not run for each subscriber (as there are 2 in this case)
+    let httpResponse: Observable<TokenGet> = this.http.post<TokenGet>(environment.base_endpoint + '/api/account/token', body).share();
 
     // this subscription is called before the component one so we can save the token first
     httpResponse.subscribe(
