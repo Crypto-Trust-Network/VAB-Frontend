@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Token, TokenGet } from '../models/token';
 import { Prefs } from '../models/prefs';
+import { Observable } from 'rxjs/Observable';
+import { Subscriber } from 'rxjs/Subscriber';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable()
 export class TokenService {
 
   constructor() { }
 
-  getToken(): Token {
+  /**
+   * load the token straight from storage
+   */
+  getStorageToken(): Token {
     // check the token exists
     if (!this.hasToken())
       return null;
@@ -29,12 +35,17 @@ export class TokenService {
     return token;
   }
 
+  // tokenExpired(): boolean {
+  //   // if now is after when the token expires
+  //   return new Date().getTime() > this.getStorageToken().expires.getTime();
+  // }
+
   /**
    * is there a token saved
    */
-  hasToken() {
+  hasToken(): boolean {
     // make sure all the tokens properties exist
-    return localStorage.getItem(Prefs.TOKEN_ACCESS_TOKEN) && localStorage.getItem(Prefs.TOKEN_REFRESH_TOKEN) && localStorage.getItem(Prefs.TOKEN_EMAIL) && localStorage.getItem(Prefs.TOKEN_USERID) && localStorage.getItem(Prefs.TOKEN_ROLES) && localStorage.getItem(Prefs.TOKEN_EXPIRES);
+    return localStorage.getItem(Prefs.TOKEN_ACCESS_TOKEN) != null && localStorage.getItem(Prefs.TOKEN_REFRESH_TOKEN) != null && localStorage.getItem(Prefs.TOKEN_EMAIL) != null && localStorage.getItem(Prefs.TOKEN_USERID) != null && localStorage.getItem(Prefs.TOKEN_ROLES) != null && localStorage.getItem(Prefs.TOKEN_EXPIRES) != null;
   }
 
   /**

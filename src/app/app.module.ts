@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -10,6 +12,9 @@ import { GuardService } from './services/guard.service';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AppService } from './app.service';
+import { RequestInterceptor } from './interceptor';
+import { Injector } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -21,11 +26,21 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
     TokenService,
-    GuardService
+    GuardService,
+    AppService,
+    HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+      deps: [TokenService]
+    }
   ],
   bootstrap: [AppComponent]
 })

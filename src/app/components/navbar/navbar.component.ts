@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
+  isLoggedIn: boolean;
   ngOnInit() {
+    this.appService.loggedIn.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+    })
   }
-
 }
