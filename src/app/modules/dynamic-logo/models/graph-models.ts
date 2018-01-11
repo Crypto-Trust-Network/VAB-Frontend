@@ -1,4 +1,4 @@
-import { ColorEnum } from "../logo/logo.component";
+import { ColorEnum } from "../dynamic-logo/dynamic-logo.component";
 
 export const contractAddress: string = '0x491559dd3DfdBCA13EDc74569e86c8A0D517975b';
 
