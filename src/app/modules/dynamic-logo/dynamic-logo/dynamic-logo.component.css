@@ -1,0 +1,31 @@
+.d3-chart {
+  width: 100%;
+  height: 100%;
+  /* background: #3f4245; */
+  z-index:-1;
+  border-radius: 5px;
+}
+
+.nodes circle {
+  stroke-width: 1.5px;
+  stroke-width: 3px;
+}
+
+.nodes circle.bad {
+  stroke: #d84343;
+  stroke-width: 1.5px;
+}
+
+.nodes circle.good {
+  stroke: #0eff0a;
+  stroke-width: 1.5px;
+}
+
+.graph-tooltip{
+  width: 50%;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.graph-tooltip.hidden{
+  opacity: 0;
+}

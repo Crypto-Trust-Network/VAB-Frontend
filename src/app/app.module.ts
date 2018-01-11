@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppService } from './app.service';
 import { RequestInterceptor } from './interceptor';
 import { Injector } from '@angular/core';
+import { DynamicLogoModule } from './modules/dynamic-logo/dynamic-logo.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { Injector } from '@angular/core';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    DynamicLogoModule
   ],
   providers: [
     TokenService,

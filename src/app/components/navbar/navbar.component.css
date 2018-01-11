@@ -1,0 +1,17 @@
+.push-logo {
+  margin-left: 86px !important;
+}
+
+nav > *{
+  z-index: 1;
+}
+
+.graph-container {
+  top: -6px;
+  left: -11.5%;
+  height: 120%;
+  position: absolute;
+  width: 120%;
+  transform: scale(0.8);
+  z-index: 0;
+}
